@@ -1,0 +1,68 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/palindrome-index
+
+#Solution
+
+//C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool checkPalindrome(string str){
+    int x = str.length();
+    for(int i = 0; i < str.length()/2; i++){
+        if(str[i] != str[x-1-i]){
+            return false;
+            break;
+        }
+    }
+    return true;
+}
+string concat(string str,int index){
+    string temp;
+    for(int i = 0; i < str.length();i++){
+        if(i != index)
+            temp.push_back(str[i]);
+    }
+    return temp;
+}
+// Complete the palindromeIndex function below.
+int palindromeIndex(string s) {
+int x = s.length();
+    long int index = -1;
+for(int i=0; i<s.length();i++){
+    if(s[i] != s[x-1-i])
+    { 
+        if(checkPalindrome(concat(s,i)))
+            index = i;
+        if(checkPalindrome(concat(s,x-1-i)))
+            index = x-1-i;
+        break;
+    }
+}
+    return index;
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        string s;
+        getline(cin, s);
+
+        int result = palindromeIndex(s);
+
+        fout << result << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+}
