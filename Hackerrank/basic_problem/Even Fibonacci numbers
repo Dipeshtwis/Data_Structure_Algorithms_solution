@@ -1,0 +1,60 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/euler002
+
+#Solution
+
+#Ruby
+
+#!/bin/ruby
+
+t = gets.strip.to_i
+(t).times do
+    n = gets.strip.to_i
+    fib1=0
+    fib2=2
+    sum = fib1 + fib2
+    sum = 0 if n < 2
+    while fib2 < n 
+        if n > 2
+            fib3 = 4 * fib2 + fib1
+            break unless fib3 <= n
+            fib1, fib2 = fib2, fib3
+            sum += fib3 
+        end
+    end
+    puts "#{sum}"
+end
+
+
+//C++
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n,fib1=0,fib2=2,sum = fib1+fib2,fib3;
+        cin>>n;
+        while(fib2 <= n){
+            
+            if(n < 2)
+                cout<<"0"<<endl;
+            else{
+              fib3 = fib1 + (4 *fib2);
+            
+            if(fib3 > n)
+                break;
+            fib1 = fib2;
+            fib2 = fib3;
+            sum +=fib3;
+        }
+            }
+    cout<<sum<<endl;  
+    }
+    return 0;
+}
