@@ -1,42 +1,57 @@
 class Node
   attr_accessor :value, :next_node
-  
   def initialize(value, next_node = nil)
-	  @value = value
+    @value = value
     @next_node = next_node
   end
 end
-
 class LinkedList
   #setup head and tail
-  attr_accessor :head, :tail
-  
+  attr_accessor :head, :tail, :current_size
   def initialize
       @head = nil
       @tail = nil
+      @current_size = 0
   end
-  
   def add(number)
     this_node = Node.new(number)
-      if @head.nil?
-         @head = this_node
-        return
-      end
- 
-      current = @head
-      until current.next_node.nil?
+    if @head.nil?
+      # ===>head and tail ---> this_node
+      @head = this_node
+      @tail = this_node
+      @current_size += 1
+      return
+    end
+    if @head == @tail
+      @tail.next_node = this_node
+      @tail = this_node
+      @current_size += 1
+      return
+    end
+    #3-->5
+    #tail = 5
+    #head = 3
+    #3-->5-->7
+    #tail = 7
+    @tail.next_node = this_node
+    @tail = this_node
+    @current_size += 1
+  end
+  def get(index)
+    if index == 0
+      return @head.value
+    elsif index == current_size - 1
+      return @tail.value
+    else
+      current = @head.next_node
+      i = 1
+      while current.next_node != nil
+        return current.value if i == index
+        i += 1
         current = current.next_node
       end
-   
-      current.next_node = this_node.value
-  end
-
-  def get(index)
-    current=@head
-    index.times do
-      current = current.next_node
+      -1
     end
-    return current
   end
 end
 
