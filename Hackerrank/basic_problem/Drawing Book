@@ -1,0 +1,35 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/drawing-book/problem
+
+#Solution
+
+#Ruby
+
+def pageCount(n, p)
+    s = p / 2 if p.even?
+    s = (p -1) / 2 if p.odd?
+    if (n.even? and p.even?) || (n.odd? and p.odd?)
+        e = (n - p) / 2
+    elsif n.even? and p.odd?
+        e = ((n - p) / 2) + 1;
+    else
+        e = (n - p - 1) / 2
+    end 
+    result = e > s ? s : e
+end
+
+//C++
+
+int pageCount(int n, int p) {
+    int s,e,result;  
+    s = p / 2;
+    if ((n % 2 == 0 && p % 2 == 0) || (n % 2 != 0 && p % 2 != 0))
+        e = (n - p) / 2;
+    else if (n % 2 == 0 && p % 2 != 0)
+        e = ((n - p) / 2) + 1;
+    else
+        e = (n - p - 1) / 2; 
+    result = (e > s) ? s : e;
+    return result;
+}
