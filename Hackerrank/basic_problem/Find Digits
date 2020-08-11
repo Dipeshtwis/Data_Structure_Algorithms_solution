@@ -1,0 +1,20 @@
+#Qusetion_link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/find-digits/problem
+
+
+#Solutions
+
+#Ruby
+
+def findDigits(n)
+    r = n
+    count = 0
+    while r > 0
+        p = r % 10
+        r = r / 10
+        next if p == 0
+        count += 1 if n % p == 0
+    end
+    return count
+end
