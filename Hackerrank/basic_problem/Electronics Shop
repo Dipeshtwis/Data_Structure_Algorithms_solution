@@ -1,0 +1,25 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/electronics-shop/problem
+
+#Solution
+
+
+#Ruby
+
+def getMoneySpent(keyboards, drives, b)
+    keyboards.sort!
+    drives.sort!
+    ans1 = -1
+    keyboards.each do |i|
+        drives.each do |j|
+            ans = i + j
+            if(ans > b)
+                break
+            elsif ans <= b and ans > ans1
+                ans1 = ans
+            end
+        end
+    end
+    return ans1
+end
