@@ -1,0 +1,16 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/angry-professor/problem
+
+#Solution
+
+#Ruby
+
+def angryProfessor(k, a)
+    c = 0
+    a.each do |i|
+        c += 1 if i <= 0
+    end
+    return "YES" if c < k
+    return "NO"
+end
