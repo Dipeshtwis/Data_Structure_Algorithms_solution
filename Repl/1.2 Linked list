@@ -29,87 +29,61 @@ class Node
 end
 class LinkedList
   #setup head and tail
-  attr_accessor :head, :tail, :current_size
+  attr_accessor :head, :tail
   def initialize
       @head = nil
       @tail = nil
-      @current_size = 0
   end
   def add(number)
     this_node = Node.new(number)
     if @head.nil?
       @head = this_node
       @tail = this_node
-      @current_size += 1
       return
-    end
-    if @head == @tail
+    else
       @tail.next_node = this_node
       @tail = this_node
-      @current_size += 1
-      return
     end
-    
-    @tail.next_node = this_node
-    @tail = this_node
-    @current_size += 1
   end
   
   def add_at(index, number)
     this_node = Node.new(number)
-    if index ===0 and @head.nil?
-      @head = this_node
-      @tail = this_node
-      @current_size += 1
-      return
-    elsif index == 0 and @head != nil
+    if index ==0
       this_node.next_node = @head
       @head = this_node
-      @current_size += 1
-      return
-    elsif index == current_size - 1 
-      @tail.next_node = this_node
-      @tail = this_node
-      @current_size += 1
       return
     else
-     current = @head.next_node
-      i = 1
-      until i == index
-        i += 1
-        current = current.next_node
-      end
-      this_node.next_node = current.next_node
-      current.next_node = this_node
-      @current_size += 1
+     prev_node = get_node(index - 1)
+     next_node = get_node(index)
+     prev_node.next_node = this_node
+     this_node.next_node = next_node
     end
   end
   
   def get(index)
-    if index == 0
-      return @head.value
-    elsif index == current_size - 1
-      return @tail.value
-    else
-      current = @head.next_node
-      i = 1
-      while current.next_node != nil
-        return current.value if i == index
-        i += 1
-        current = current.next_node
-      end
-      -1
+    return @head.value if index == 0
+    current_node = @head
+    (index).times do
+      current_node = current_node.next_node
     end
+      current_node.value
   end
   
   def remove(index)
-    
+    prev_node = get_node(index - 1)
+    next_node = get_node(index + 1)
+    prev_node.next_node = next_node
   end
   
   private
   
-  def get_node
-    
+  def get_node(index)
+    return @head if index == 0
+    node = @head.next_node
+    (index - 1).times do
+      node = node.next_node
+    end
+    node
   end
 end
 
