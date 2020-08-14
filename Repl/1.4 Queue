@@ -1,0 +1,70 @@
+#Question
+
+Queue
+Create a Queue with the two methods add and remove. Use your LinkedList class to keep track of the elements internally.
+In this challenge, there's one more detail: If remove is called on the empty Queue, return -1.
+
+Example
+
+This is an example of a test case:
+
+queue = Queue.new
+
+queue.add(3)
+queue.add(5)
+puts queue.remove
+# => 3
+queue.add(2)
+queue.add(7)
+puts queue.remove
+# => 5
+puts queue.remove
+# => 2
+puts queue.remove
+# => 7
+puts queue.remove
+# => -1
+
+The numbers come out in the order they went in, and the final remove returns a -1 since the queue is empty.
+
+
+
+#Solution
+
+#Ruby
+
+# Start with your code from LinkedList challenge.
+class Node
+  attr_accessor :value, :next_node
+  def initialize(value, next_node = nil)
+    @value = value
+    @next_node = next_node
+  end
+end
+
+class Queue
+  def initialize
+    @head = nil
+    @length = 0
+  end
+
+  def add(number)
+    this_node = Node.new(number)
+    unless @head
+      @head = this_node
+    else
+      @tail.next_node = this_node
+    end
+    @tail = this_node
+    @length += 1
+  end
+  
+  def remove
+    return -1 unless @length > 0
+    number = @head.value
+    @head = @head.next_node
+    @tail = nil if @length == 1
+    @length -= 1
+    number
+  end
+end
