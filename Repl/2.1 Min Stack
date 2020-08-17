@@ -1,0 +1,80 @@
+#Question
+
+Min Stack
+Create a Stack that contains the standard push and pop methods. It should also contain another method min that returns the minimum number in the Stack.
+
+Extra Credit
+
+All operations should take O(1) time.
+
+Example
+
+This is an example of a test case:
+
+stack = Stack.new
+stack.push(3)
+stack.push(5)
+puts stack.min
+# => 3
+stack.pop
+stack.push(7)
+puts stack.min
+# => 3
+stack.push(2)
+puts stack.min
+# => 2
+stack.pop
+puts stack.min
+# => 3
+
+
+#Solution
+
+#Ruby
+
+class Node
+  attr_accessor :value, :next
+  def initialize(value)
+    @value = value
+    @next = nil
+  end
+end
+
+class Stack
+  def initialize
+    @top = nil
+    @minimum = nil
+  end
+
+  def push(number)
+    if @top == nil
+      @top = Node.new(number)
+      @minimum = number
+    elsif number < @minimum
+      temp = (2 * number) - @minimum 
+      new_node = Node.new(temp) 
+      new_node.next = @top 
+      @top = new_node 
+      @minimum = number
+    else
+      new_node = Node.new(number) 
+      new_node.next = @top 
+      @top = new_node 
+    end
+  end
+  
+  def pop
+    if @top == nil
+      print( "Stack is empty") 
+    else
+      removed_node = @top.value 
+      @top = @top.next
+      @minimum = ((2 * @minimum) - removed_node) if removed_node < @minimum
+    end
+  end
+  
+  def min
+    @minimum
+  end
+
+end
