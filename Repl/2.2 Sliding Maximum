@@ -33,14 +33,26 @@ The first argument is k, which is 3 in this case. The output is the largest numb
 #Ruby
 
 def sliding_maximum(k, array)
-  # your code here
   res = []
   max = array[0]
+  max2 = array[0]
   (k-1).times do |i|
-    max = max > array[i + 1] ? max : array[i + 1]
+    if max >= array[i + 1]
+      max2 = array[i + 1]
+    else
+      max2 = max
+      max = array[i + 1]
+    end
   end
   res << max
   (array.size - k).times do |j|
+    max = max2 if max == array[j]
+    if max >= array[k]
+      max2 = array[k]
+    else
+      max2 = max
+      max = array[k]
+    end
     max = max > array[k] ? max : array[k]
     k += 1
     res << max
