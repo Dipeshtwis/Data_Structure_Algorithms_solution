@@ -1,0 +1,79 @@
+#Question
+
+Balanced Brackets
+There are 3 kinds of Brackets: [] {} (). Given a String  of characters, check if all the brackets in the String are Balanced. A  string is balanced if all the start and end brackets are in a correct  order so they match each other.
+Here are some balanced Strings:
+
+    {}
+    (hello)[world]
+    [({}{}{})([])]
+
+
+Here are some Unbalanced ones:
+
+    (hello - no ending )
+    ([)] - The [ is improperly enclosed in the ().
+    )( - There's an ending ) without a ( before it.
+
+
+Return true if a line is balanced and false otherwise.
+
+Examples
+
+The following are 3 test cases:
+
+puts balanced_brackets?('(hello)[world]')
+# => true
+
+puts balanced_brackets?('([)]')
+# => false
+
+puts balanced_brackets?('[({}{}{})([])]')
+# => true
+
+
+#Solution
+
+#Ruby
+
+def balanced_brackets?(string)
+  res = []
+  (string.size).times do |c|
+    if string[0] == ')' || string[0] == ']' || string[0] == '}'
+      return false
+    end
+    if (string[c] == '(') || (string[c] == '[') || (string[c] == '{')
+      res << string[c]
+    elsif res.last == '['
+        res.pop if string[c] == ']'
+    elsif res.last == '('
+        res.pop if string[c] == ')'
+    else res.last == '{'
+        res.pop if string[c] == '}'
+    end
+  end
+    
+    return false unless res.empty?
+    return true
+end
+
+
+# Model Solution
+
+def balanced_brackets?(string)
+  stack = []
+	opening = ['(', '[', '{']
+	closing = [')', ']', '}']
+	
+	string.chars.each do |character|
+		if opening.include?(character)
+			stack << character
+		elsif closing.include?(character)
+			value = stack.pop
+			return false if opening.index(value) != closing.index(character)
+		end
+	end
+	
+	stack.empty?
+end
+
