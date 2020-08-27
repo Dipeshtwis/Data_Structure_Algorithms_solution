@@ -1,0 +1,13 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/the-hurdle-race/problem
+
+#Solution
+
+#Ruby
+
+def hurdleRace(k, height)
+  m = height.max { |a, b| a<=>b}
+  return 0 if k >= m
+  return m - k
+end
