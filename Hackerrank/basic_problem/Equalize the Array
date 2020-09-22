@@ -1,0 +1,15 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/equality-in-a-array
+
+
+#Solution
+
+#Ruby
+
+def equalizeArray(arr)
+    freq = arr.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+    d = arr.max_by { |v| freq[v] }
+    d = arr.count(d)
+    return arr.size - d
+end
