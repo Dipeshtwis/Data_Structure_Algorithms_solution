@@ -1,0 +1,25 @@
+#Question_Link
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/encryption
+
+#Solution
+
+#Ruby
+
+def encryption(s)
+  x = Math.sqrt(s.size).floor
+  y = Math.sqrt(s.size).ceil
+  x += 1 if x*y < s.size
+  i = 0
+  ans = ""
+  while i < y
+      j = i
+      while j < s.size
+         ans << s[j]
+          j += y
+      end
+      ans << " "
+      i += 1
+  end
+  ans
+end
