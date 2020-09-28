@@ -1,0 +1,20 @@
+#Questions
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/chocolate-feast/problem
+
+
+#Solutions
+
+#Ruby
+
+def chocolateFeast(n, c, m)
+    g = n / c
+    choco = g
+    while(g >= m)
+        rem = g / m
+        re = g % m
+        g = rem + re
+        choco += rem
+    end
+    choco
+end
