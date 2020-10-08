@@ -1,0 +1,25 @@
+#Question_Link
+
+https://leetcode.com/problems/two-sum/
+
+#Solutions
+
+// C++ (approach-1 Brute-force)
+// C++ (approach-2 Hashing)
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map <int, int> mp;
+        vector<int> res;
+        for(int i = 0; i < nums.size(); i++){
+            if(mp.find(target - nums[i])!= mp.end()){
+              res.push_back(mp[target - nums[i]]);
+              res.push_back(i);
+              return res;
+            } 
+           mp.insert({nums[i], i});
+        }
+        return res;
+    }
+};
