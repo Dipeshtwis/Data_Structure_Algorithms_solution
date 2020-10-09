@@ -1,0 +1,29 @@
+#Question_link
+
+https://leetcode.com/problems/subsets/
+
+#Solutions
+
+// C++ (approach Dfs + backtracking)
+
+class Solution {
+    vector<vector<int>> ans;
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+        vector<int> current;
+        dfs( 0, nums, current);
+        return ans;
+    }
+    
+    void dfs( int index, vector<int>& nums, vector<int>& current){
+        
+        ans.push_back(current);
+        
+        for(int i=index; i<nums.size();i++){
+            current.push_back(nums[i]);
+            dfs(i + 1, nums, current);
+            current.pop_back();
+        }
+    }
+};
