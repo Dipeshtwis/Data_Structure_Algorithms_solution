@@ -1,0 +1,23 @@
+#Questions
+
+https://leetcode.com/problems/single-number/
+
+#Solutions
+
+
+//C++ (1st approach: Brute-force - t.c - O(n^2), s.c - O(1))
+//C++ (2nd approach: Using Hashmap - t.c - O(n), s.c - O(n))
+//C++ (3rd approach: Using XOR - t.c - O(n), s.c - O(1))
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        if(nums.size() == 1)
+            return nums[0];
+        int x = nums[0] ^ nums[1];
+       for(int i=2;i<nums.size();i++){
+           x ^= nums[i];
+       }
+        return x;
+    }
+};
