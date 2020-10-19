@@ -1,0 +1,31 @@
+#Questions
+
+How Tall is the Tree?
+Can you find the height of a Binary Tree? The height is the number of Nodes from the Root to the lowest Leaf. The Tree does not need to be balanced.
+
+For example, in the tree below, the height is 4:
+
+Challenge
+Return the height of the Tree.
+
+Example
+
+array_tree = [2, 7, 5, 2, 6, 0, 9]
+puts binary_tree_height(array_tree)
+=> 3
+
+#Solutions
+
+#Ruby
+
+def binary_tree_height(array_tree)
+  count = 0
+  index = 0
+  array_tree.each do |i|
+    count += 1 if index < array_tree.size
+    index = 2 * index + 1
+  end
+  return count
+end
+
+puts binary_tree_height([2, 7, 5, 2, 6, 0, 9])
