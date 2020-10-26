@@ -1,0 +1,63 @@
+#Question
+
+Is it balanced?
+Can you check if a tree is a height-balanced?
+
+In this challenge, a tree is height-balanced if the maximum and minimum path from any node to a terminal (null node) descendant differs by at most 1.
+
+For example, this tree is not height-balanced, since the minimum path going down from 5 (to the left) is 2 less than the maximum path from 5 (to 9 and 4).
+
+Challenge
+Return true if a given tree is height-balanced and false otherwise.
+
+Example
+
+tree = [1, 2, 0, 3, 4, 0, 0]
+balanced_tree?(tree)
+# => false
+
+
+#Solution
+
+#Ruby
+
+class Node
+	attr_reader :data
+  attr_accessor :left, :right
+  
+  def initialize data
+    @data = data
+  end
+end
+
+def array_to_tree(array, i = 0)
+	return nil if i >= array.length || array[i] == 0
+
+  node = Node.new(array[i])
+  node.left = array_to_tree(array, 2*i+1)
+  node.right = array_to_tree(array, 2*i+2)
+
+  node
+end
+
+def height(node)
+	return 0 if node.nil?
+	
+	leftHeight = height(node.left)
+  return -1 if leftHeight == -1
+
+  rightHeight = height(node.right)
+  return -1 if rightHeight == -1
+
+  diff = leftHeight - rightHeight
+  if diff.abs > 1
+    -1
+  else
+    [leftHeight, rightHeight].max + 1
+  end
+end
+
+def balanced_tree?(array)
+  root = array_to_tree(array)
+	height(root) == -1 ? false : true
+end
