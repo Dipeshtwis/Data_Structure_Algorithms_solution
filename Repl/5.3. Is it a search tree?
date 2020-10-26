@@ -1,0 +1,129 @@
+#Question
+
+Is it a Search Tree?
+Given a binary tree, can you determine if it is a proper Binary Search Tree?
+
+In a binary search tree, every descendant to the right of node P must be greater than P, and every descendant to the left of P must be less than P.
+
+The input will be given as a list, as in the previous exercises.
+
+Here's a good Binary Search Tree:
+...and here's a bad one:
+
+This tree is not a proper BST for 2 reasons:
+- The 8 is smaller than the 9, even though it is in a right subtree of 9.
+- The 6 is smaller than the 7, even though it is in a right subtree of 7.
+
+Challenge
+Return true if the given tree is a proper binary search tree, and false otherwise.
+
+Example
+
+tree = [10, 4, 12]
+search_tree?(tree)
+# => true
+
+
+#Solutions
+
+#Ruby
+
+class Node
+	attr_reader :data
+	attr_accessor :left, :right
+	
+	def initialize data
+		@data = data
+	end
+end
+
+def array_to_tree(array, i = 0)
+	return nil if i >= array.length || array[i] == 0
+
+  node = Node.new(array[i])
+  node.left = array_to_tree(array, 2*i+1)
+  node.right = array_to_tree(array, 2*i+2)
+
+  node
+end
+
+def search_tree?(array)
+	root = array_to_tree(array)
+  recursive_tree(root)
+end
+
+def recursive_tree(tree, min = nil, max = nil)
+  return true if tree.nil?
+  return false if min && tree.data < min 
+  return false if max && tree.data > max
+  recursive_tree(tree.left, min, tree.data) && recursive_tree(tree.right, tree.data, max)
+end
+
+#ruby iterative sol
+
+def search_tree?(tree)
+  root = array_to_tree(tree)
+  stack = []
+  current = root
+  previous = nil
+
+  while !stack.empty? || current
+    # if the current node is not nil, then traverse its left subtree
+    if current
+      stack.push(current)
+      # set the left subtree as current
+      current = current.left
+    # if the current node is nil, then traverse the right subtree of its parent
+    else
+      # get back the parent node from stack
+      current = stack.pop
+      return false if previous && current.data < previous.data
+
+      previous = current
+      # set the right subtree as current
+      current = current.right
+    end
+  end
+  # return true if it passes all nodes
+  true
+end
+
+#Model ruby sol
+
+class Node
+  attr_reader :data
+  attr_accessor :left, :right
+
+  def initialize(data)
+    @data = data
+  end
+end
+
+def array_to_tree(array, i)
+  return nil if i >= array.length || array[i] == 0
+
+  node = Node.new(array[i])
+  node.left = array_to_tree(array, 2*i+1)
+  node.right = array_to_tree(array, 2*i+2)
+
+  node
+end
+
+def search_tree?(array_tree)
+  # write your code here
+  tree = array_to_tree(array_tree, 0)
+  
+  in_order_array = in_order(tree)
+  
+  in_order_array == in_order_array.sort
+end
+
+def in_order(node)
+  if node == nil
+    return []
+  end
+
+  result = in_order(node.left)
+  result << node.data
+  result += in_order(node.right)
+end
