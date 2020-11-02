@@ -1,0 +1,18 @@
+#Question
+
+https://leetcode.com/problems/majority-element/
+
+#Solutions
+
+#Ruby
+
+def majority_element(nums)
+    nums1 = nums.uniq
+    d = 0
+    nums1.each do |i|
+        c = nums.count(i)
+        d = i
+        break if c > nums.size / 2
+    end
+    return d
+end
