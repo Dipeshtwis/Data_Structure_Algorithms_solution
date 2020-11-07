@@ -20,3 +20,17 @@ public:
         return profit;
     }
 };
+
+#Ruby
+
+def max_profit(prices)
+    min = prices.max
+    profit = 0
+    i = 0
+   while(i < prices.size()) 
+       min = [min, prices[i]].min
+       profit = [profit, prices[i] - min].max
+       i += 1
+   end
+    profit
+end
