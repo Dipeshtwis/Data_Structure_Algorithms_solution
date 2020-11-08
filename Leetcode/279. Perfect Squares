@@ -1,0 +1,26 @@
+#Questions
+
+https://leetcode.com/problems/perfect-squares/
+
+#Solutions
+
+- (1st - recursive)
+- (2nd - Dynamic)
+
+#Ruby (3rd approach - Lagrange 3 square theorem)
+
+def num_squares(n)
+   return 1 if Math.sqrt(n).ceil == Math.sqrt(n).floor
+    m = n
+    while(m % 4 == 0)
+        m /= 4
+    end
+    return 4 if m%8 == 7
+    i = 1
+    while(i * i <= n)
+        b = Math.sqrt( n - (i * i)).ceil
+        return 2 if b * b == ( n - (i * i))
+        i += 1
+    end
+    return 3
+end
