@@ -1,0 +1,69 @@
+#Question
+
+DFS Algorithm
+DFS goes through a graph as far as possible in one direction before backtracking to other nodes. DFS is similar to the pre-order tree traversal, but you need to make sure you don't get stuck in a loop. To do this, you'll need to keep track of which Nodes have been visited.
+Challenge
+
+Create a graph from the given input and Run through it with a Depth-first-search. Return an Array with the nodes in the order you first visit them. Visit the first adjacent Node in the input before going on to the other nodes.
+
+Example
+
+graph = {
+  0 => [2], 
+  1 => [4], 
+  2 => [5, 0, 3], 
+  3 => [2], 
+  4 => [1, 5], 
+  5 => [4, 2]
+}
+
+
+depth_first_search(graph)
+# => [0, 2, 5, 4, 1, 3]
+
+#SOlution
+
+#Ruby
+
+def depth_first_search(graph)
+  discovered = Array.new(graph.keys.length, false)
+  stack = []
+  path = []
+  stack.push(0)
+  discovered[0] = true
+
+  until stack.empty?
+    current = stack.pop
+    path.push(current)
+    
+    graph[current].reverse_each do |i|   
+      unless discovered[i]
+        stack.push(i)
+        discovered[i] = true
+      end
+    end
+    
+  end
+  path
+end
+
+#Ruby (Model solution)
+
+def depth_first_search(graph)
+  result = []
+  stack = [0]
+  visited = []
+  
+  while stack.size != 0
+    head = stack.pop
+    result << head
+    visited << head
+    
+    not_visited = graph[head].reject { |node| visited.include? node }
+    
+    visited += not_visited
+    stack += not_visited.reverse
+  end
+  
+  result
+end
