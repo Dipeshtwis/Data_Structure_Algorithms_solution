@@ -1,0 +1,72 @@
+#Question
+
+Breadth-First Search
+BFS begins at one node in a graph and visits all the neighboring nodes. It then goes to each of those neighbors to explore their unvisited neighbors in order. So it goes through the entire graph one level at a time, until the whole graph has been visited.
+BFS goes through the Nodes one level at a time, so you need a structure to keep track of the next nodes to be processed.
+
+Q: What structure can be used to access items in the order they were put in?
+A: A Queue
+
+Challenge
+Return an array with the given graph in BFS order.
+
+Sample Input
+
+graph = {
+  0 => [2], 
+  1 => [4], 
+  2 => [5, 0, 3], 
+  3 => [2], 
+  4 => [1, 5], 
+  5 => [4, 2]
+}
+bfs(graph)
+# => [0, 2, 5, 3, 4, 1]
+
+#Solution
+
+#Ruby
+
+def bfs(graph)
+  discovered = Array.new(graph.keys.length, false)
+  queue = []
+  path = []
+  queue.push(0)
+  discovered[0] = true
+  
+  until queue.empty?
+    current = queue.shift
+    path.push(current)
+    
+    graph[current].each do |i|
+      
+      unless discovered[i]
+        queue.push(i)
+        discovered[i] = true
+      end
+    end
+  end
+  path
+end
+
+
+#Ruby (Model Solution)
+
+def bfs(graph)
+  queue = [0]
+  result = []
+  visited = []
+  
+  until queue.empty?
+    head = queue.shift
+    result << head
+    visited << head
+    
+    not_visited = graph[head].reject { |node| visited.include? node }
+    
+    visited += not_visited
+    queue += not_visited
+  end
+  
+  result
+end
