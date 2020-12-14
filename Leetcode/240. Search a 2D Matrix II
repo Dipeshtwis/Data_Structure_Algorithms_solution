@@ -1,0 +1,31 @@
+#Quesrtion
+
+https://leetcode.com/problems/search-a-2d-matrix-ii/
+
+
+#Solution
+
+//C++ (still 1 test case failing)
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int t;
+        for(int i = 0; i< matrix.size();i++){
+            if(i == 0)
+                t = matrix[i].size();
+            if(t == 0)
+                break;
+            for(int j=0;j< t;j++){
+                if(matrix[i][j] == target)
+                    return true;
+                if(matrix[i][j]> target)
+                {
+                    t = j;
+                    break;
+                }
+            }
+        }
+        return false;
+    }
+};
