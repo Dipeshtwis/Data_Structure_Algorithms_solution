@@ -1,0 +1,36 @@
+#Question
+
+Insertion Sort Itself
+In Insertion Sort Part 1, you sorted one element in the array. Using the same approach repeatedly, can you sort an entire unsorted array?
+
+Output
+In this challenge print the array every time an element is “inserted” into the array in (what is currently) its correct place (even if it doesn't move). Begin printing from the second element and on.
+
+Challenge
+Can you print the steps of Insertion Sort?
+
+Example
+
+sort_itself([1, 4, 3, 6, 9, 2])
+
+# => 1 4 3 6 9 2
+#    1 3 4 6 9 2
+#    1 3 4 6 9 2
+#    1 3 4 6 9 2
+#    1 2 3 4 6 9
+
+
+#Solution
+
+def sort_itself(ar)
+  for i in 1...ar.size()
+    num = ar[i]
+    j = i - 1
+    while j >= 0 && num < ar[j]
+      ar[j + 1] = ar[j]
+      j = j - 1
+    end
+    ar[j + 1] = num
+    puts ar.join(' ')
+  end
+end
