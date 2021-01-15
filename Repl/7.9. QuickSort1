@@ -40,3 +40,21 @@ def partition(array)
   end
   ar
 end
+
+#Model Solution
+
+def partition(array)
+  pivot = array.first
+  smaller = []
+  greater = []
+  
+  array[1..-1].each do |number|
+    if number > pivot
+      greater << number
+    else
+      smaller << number
+    end
+  end
+  
+  smaller + [pivot] + greater
+end
