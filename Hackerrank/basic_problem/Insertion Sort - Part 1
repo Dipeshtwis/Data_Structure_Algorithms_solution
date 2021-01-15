@@ -1,0 +1,29 @@
+#Question
+
+https://www.hackerrank.com/contests/microverse-coding-challenges/challenges/insertionsort1/problem
+
+#Solution (In C)
+
+void insertionSort1(int n, int ar_size, int* ar) {
+    int val=ar[ar_size-1],flag=0;
+    for(int i=ar_size-1;i>=0;i--)
+    {
+        if(val<ar[i-1])
+            {
+            ar[i]=ar[i-1];
+        }
+        else
+            {
+            ar[i]=val;
+            flag=1;
+        }
+       for(int _ar_i = 0; _ar_i < ar_size; _ar_i++)
+        {
+           printf("%d ",ar[_ar_i]);
+       }
+       
+        printf("\n");
+        if(flag==1)
+          break;
+   }
+}
