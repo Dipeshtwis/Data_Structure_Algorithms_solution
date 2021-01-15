@@ -1,0 +1,50 @@
+#question
+
+Challenge 
+Given a sorted list of numbers with an unsorted number 'X' in the right-most spot, can you write some simple code to insert 'X' into the list so it remains sorted?
+
+Print the list every time a value is shifted, until the list is fully sorted. The goal of this challenge is to follow the correct order of insertion sort.
+
+How to Solve: You can copy the right-most value ('X') to a variable, and consider its cell “empty”. Since this leaves an extra cell empty on the right, you can shift every number over until 'X' can be inserted. This will create a duplicate of each value, but when you reach the right spot, you can replace a value with 'X'.
+
+Output Format 
+On each line, output the entire array every time an item is shifted in it. This will include duplicate values.
+
+Example
+
+insertion_sort([1, 3, 2])
+
+# => 1 3 3
+
+#    1 2 3
+
+HINT: To print the array in the format above you can use:
+
+puts array.join(' ')
+
+
+#Solution (In ruby)
+
+def insertion_sort(ar)
+  num = ar[ar.size - 1]
+  placed = false
+  (ar.size - 2).downto(0) do |j|
+    if(ar[j] > num)
+      ar[j + 1] = ar[j]
+      puts ar.join(' ')
+    else
+      ar[j + 1] = num
+      puts ar.join(' ')
+      placed = true
+      break
+    end
+  end
+  if(!placed)
+    ar[0] = num
+    puts ar.join(' ')
+  end
+end
+
+insertion_sort([1, 3, 2])
+puts '-' * 20
+insertion_sort([1, 4, 6, 9, 3])
