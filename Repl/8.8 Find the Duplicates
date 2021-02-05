@@ -1,0 +1,31 @@
+#Question
+
+p duplicates([203, 204, 205, 206, 207, 208, 203, 204, 205, 206], [203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 204, 205, 206])
+# => [204, 205, 206]
+
+#Solution (In ruby)
+
+def duplicates(arr1, arr2)
+  # write your code here
+  arr1 = arr1.sort
+  arr2 = arr2.sort
+  i = 0
+  j = 0
+  res = []
+  while (i < arr1.size() || j < arr2.size())
+    if arr1[i] != arr2[j] && arr1[i] > arr2[j]
+      res.push(arr2[j])
+      j += 1
+    elsif arr1[i] != arr2[j] && arr1[i] < arr2[j]
+      res.push(arr1[j])
+      i += 1
+    else
+      i += 1
+      j += 1
+    end
+  end
+  res
+end
+
+p duplicates([203, 204, 205, 206, 207, 208, 203, 204, 205, 206], [203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 204, 205, 206])
+# => [204, 205, 206]
